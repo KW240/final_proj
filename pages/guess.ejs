@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="gameSection">
+
+        Description: <%=description%>
+        <br>
+        Guess the name of the Pokemon: <input type="text" id="pokemonNameInput" required>
+        <button onclick="checkGuess()">Enter</button>
+        <br>
+        <h5 id="resultMessage"></h5>
+        <form action="/guess" method="POST" id="guessForm">
+            Total guesses: <input type="text" id="totalGuessesOutput" name = "totalGuessesOutput" value = "<%=totalGuesses%>" readonly> 
+            Current Score: <input type="text" id="currentScoreOutput" name = "currentScoreOutput" value = "<%=totalScore%>" readonly> 
+        <br><br>
+        </form>
+        <a href="/entername">Done with this game?</a>
+
+    </div>
+    <input type="text" id="hiddenDiv" value = "<%=answer%>" readonly> 
+
+    <script src="main.js"></script>
+    <script>
+        function checkGuess() {
+        let guess = document.getElementById("pokemonNameInput").value.toLowerCase();
+        let output = "";
+        const answer = document.getElementById("hiddenDiv").value.toLowerCase();
+        let totalGuessesElement = document.getElementById("totalGuessesOutput");
+        let currentScoreElement = document.getElementById("currentScoreOutput");
+
+        if (guess === answer) {
+            currentScoreElement.value = parseInt(currentScoreElement.value) + 1;
+            output = "You got it correct!!";
+            document.getElementById("resultMessage").innerHTML = output;
+            setTimeout(function() { document.getElementById("guessForm").submit(); }, 2000); 
+        } else if (parseInt(totalGuessesElement.value) > 1) {
+            output = "You got it wrong";
+            document.getElementById("resultMessage").innerHTML = output;
+            totalGuessesElement.value = parseInt(totalGuessesElement.value) - 1;
+        } else {
+            output = `You ran out of guesses! The answer was ${answer}.`;
+            document.getElementById("resultMessage").innerHTML = output;
+            setTimeout(function() { window.location.href = "/entername"; }, 4000);
+        }
+}
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+}
+
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.gameSection{
+    border: solid;
+    border-radius: 1px;
+    border-color: black;
+    background-color: greenyellow;
+    
+}
+
+#hiddenDiv {
+    color: white;
+}
